@@ -4345,8 +4345,11 @@ namespace refl::detail
     adding them was considered to not be efficient from a compilation-time point of view.
 */
 #define REFL_DETAIL_MEMBER_PROXY(MemberName_) \
-        template <typename Proxy> struct remap { \
-            template <typename... Args> decltype(auto) MemberName_(Args&&... args) { \
+        template <typename Proxy> \
+        struct remap { \
+            template <typename... Args> \
+            decltype(auto) MemberName_(Args&&... args) \
+            { \
                 return Proxy::invoke_impl(static_cast<Proxy&>(*this), ::std::forward<Args>(args)...); \
             } \
             template <typename... Args> decltype(auto) MemberName_(Args&&... args) const { \
